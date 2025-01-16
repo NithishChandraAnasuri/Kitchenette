@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./tray.png" type="image/png" />
+    <title>Meals App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-image: url(./pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg);
+        background-size: cover;
+        background-attachment: fixed; /* Ensure the background stays fixed */
+        object-fit: cover;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.358);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      p.subtitle {
+        font-size: 1.2rem;
+        color: white;
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 70%;
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        font-size: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        padding: 12px 25px;
+        background-color: #28a745;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      button:hover {
+        background-color: #218838;
+      }
+
+      .meal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin: 10px 0;
+        padding: 10px;
+      }
+
+      .meal img {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 10px;
+      }
+
+      .meal h2 {
+        color: #555;
+      }
+
+      .meal p {
+        color: #777;
+      }
+
+      .like-btn {
+        margin-top: 10px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: #ccc;
+        cursor: pointer;
+      }
+
+      .like-btn.liked {
+        color: #e63946;
+      }
+      @media (max-width: 768px) {
+        body {
+          background-image: url(./brooke-lark-oaz0raysASk-unsplash.jpg); /* New background for mobile */
+          background-position: center center; /* Keep the background centered */
+        }
+
+        .container {
+          margin: 20px; /* Adjust container margin for smaller screens */
+          padding: 15px; /* Adjust padding for better fit */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to Meals Finder</h1>
+      <p class="subtitle">
+        Discover delicious meals from around the world. Search for your favorite
+        recipes and save them to your favorites!
+      </p>
+      <input type="text" id="search" placeholder="Search for meals..." />
+      <button onclick="searchMeals()">Search</button>
+      <div id="meals"></div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
