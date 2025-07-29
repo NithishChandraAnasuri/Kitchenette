@@ -3,129 +3,193 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./tray.png" type="image/png" />
-    <title>Meals App</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-image: url(./pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg);
-        background-size: cover;
-        background-attachment: fixed; /* Ensure the background stays fixed */
-        object-fit: cover;
-        margin: 0;
-        padding: 0;
-        color: #fff;
-      }
+    <link rel="shortcut icon" href="./Kitchenette.ico" type="image/x-icon" />
 
-      .container {
-        max-width: 800px;
-        margin: 50px auto;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.358);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
+    <title>Kitchenette</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap"
+    />
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+  }
 
-      h1 {
-        font-size: 2.5rem;
-        color: white;
-        margin-bottom: 10px;
-      }
+  body {
+    height: 100vh;
+    background: linear-gradient(to bottom right, #fff8dc, #ffa500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow: hidden;
+  }
 
-      p.subtitle {
-        font-size: 1.2rem;
-        color: white;
-        margin-bottom: 20px;
-      }
+  .title-container {
+    text-align: center;
+    max-width: 100%;
+    padding: 1rem;
+  }
 
-      input {
-        width: 70%;
-        padding: 15px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 25px;
-        font-size: 1rem;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
+  .title {
+    font-size: 4rem;
+    color: #fff;
+    letter-spacing: 4px;
+    font-weight: 800;
+    display: inline-block;
+    opacity: 0;
+  }
 
-      button {
-        padding: 12px 25px;
-        background-color: #28a745;
-        color: white;
-        font-size: 1rem;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
+  .subtitle {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 1rem;
+    font-weight: 600;
+    opacity: 0;
+  }
 
-      button:hover {
-        background-color: #218838;
-      }
+  .enter-btn {
+    background: #ff5722;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
 
-      .meal {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        margin: 10px 0;
-        padding: 10px;
-      }
+  .sparkle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: sparkle-anim 0.6s forwards;
+    opacity: 0;
+  }
 
-      .meal img {
-        width: 100%;
-        max-width: 300px;
-        border-radius: 10px;
-      }
+  @keyframes sparkle-anim {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 
-      .meal h2 {
-        color: #555;
-      }
+  /* MEDIA QUERIES FOR RESPONSIVENESS */
 
-      .meal p {
-        color: #777;
-      }
+  /* Small Phones */
+  @media (max-width: 480px) {
+    .title {
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+    }
 
-      .like-btn {
-        margin-top: 10px;
-        background: none;
-        border: none;
-        font-size: 20px;
-        color: #ccc;
-        cursor: pointer;
-      }
+    .subtitle {
+      font-size: 1rem;
+    }
 
-      .like-btn.liked {
-        color: #e63946;
-      }
-      @media (max-width: 768px) {
-        body {
-          background-image: url(./brooke-lark-oaz0raysASk-unsplash.jpg); /* New background for mobile */
-          background-position: center center; /* Keep the background centered */
-        }
+    .enter-btn {
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+    }
+  }
 
-        .container {
-          margin: 20px; /* Adjust container margin for smaller screens */
-          padding: 15px; /* Adjust padding for better fit */
-        }
-      }
-    </style>
+  /* Medium Phones / Tablets */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2.8rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+    }
+
+    .enter-btn {
+      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Laptops */
+  @media (max-width: 1024px) {
+    .title {
+      font-size: 3.2rem;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+    }
+  }
+</style>
+
   </head>
   <body>
-    <div class="container">
-      <h1>Welcome to Meals Finder</h1>
-      <p class="subtitle">
-        Discover delicious meals from around the world. Search for your favorite
-        recipes and save them to your favorites!
-      </p>
-      <input type="text" id="search" placeholder="Search for meals..." />
-      <button onclick="searchMeals()">Search</button>
-      <div id="meals"></div>
+    <div class="title-container">
+      <h1 class="title">Kitchenette</h1>
+      <p class="subtitle">Your kitchen companion with a memory</p>
+      <a href="auth.html" class="enter-btn">Get Started</a>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+      // Split text into spans
+      const title = document.querySelector(".title");
+      const chars = title.textContent.split("");
+      title.innerHTML = chars.map((char) => `<span>${char}</span>`).join("");
+
+      // GSAP timeline
+      const tl = gsap.timeline({ delay: 0.5 });
+      tl.to(".title", { opacity: 1, duration: 0.2 })
+        .from(".title span", {
+          y: -100,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+        })
+        .to(
+          ".subtitle",
+          { opacity: 1, y: -10, duration: 1, ease: "power2.out" },
+          "-=0.5"
+        );
+
+      // Anime.js pulsing button
+      anime({
+        targets: ".enter-btn",
+        scale: [1, 1.05],
+        direction: "alternate",
+        loop: true,
+        easing: "easeInOutSine",
+        duration: 1200,
+      });
+
+      // Sparkles on hover
+      const btn = document.querySelector(".enter-btn");
+      btn.addEventListener("mousemove", (e) => {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        sparkle.style.left = `${e.offsetX}px`;
+        sparkle.style.top = `${e.offsetY}px`;
+        btn.appendChild(sparkle);
+
+        gsap.to(sparkle, {
+          scale: 1.2,
+          opacity: 0,
+          duration: 0.6,
+          onComplete: () => sparkle.remove(),
+        });
+      });
+    </script>
   </body>
-  <script src="script.js"></script>
 </html>
