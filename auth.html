@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kitchenette - Auth</title>
+    <link rel="icon" href="images/loginicon.jpg" type="image/x-icon" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(to bottom right, #fff8dc, #ffa500);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .auth-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        border: 3px solid #ff5722;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-toggle {
+        display: flex;
+        margin-bottom: 1.5rem;
+        border-radius: 0.5rem;
+        overflow: hidden;
+      }
+
+      .form-toggle button {
+        flex: 1;
+        padding: 0.8rem;
+        border: none;
+        background: #eee;
+        color: #555;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .form-toggle button.active {
+        background: #ff5722;
+        color: white;
+      }
+
+      .form-section {
+        display: none;
+      }
+
+      .form-section.active {
+        display: block;
+      }
+
+      .input-group {
+        margin-bottom: 1.2rem;
+        text-align: left;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #555;
+        font-weight: 500;
+      }
+
+      .input-group input[type="text"],
+      .input-group input[type="password"] {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+      }
+
+      button.submit-btn {
+        background: #ff5722;
+        color: white;
+        padding: 0.9rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      button.submit-btn:hover {
+        background-color: #e64a19;
+      }
+
+      .error-message {
+        color: red;
+        font-size: 0.9rem;
+        margin-top: -1rem;
+        margin-bottom: 1rem;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-container">
+      <img
+        src="images/loginicon.jpg"
+        alt="Auth Avatar"
+        class="avatar"
+        id="auth-avatar"
+      />
+      <h2 id="auth-title">Welcome!</h2>
+
+      <div class="form-toggle">
+        <button id="show-login" class="active">Login</button>
+        <button id="show-signup">Sign Up</button>
+      </div>
+
+      <div id="login-form" class="form-section active">
+        <div class="input-group">
+          <label for="loginUsername">Username:</label>
+          <input type="text" id="loginUsername" placeholder="Enter username" />
+        </div>
+        <div class="input-group">
+          <label for="loginPassword">Password:</label>
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter password"
+          />
+        </div>
+        <div id="loginError" class="error-message"></div>
+        <button class="submit-btn" onclick="handleLogin()">Login</button>
+      </div>
+
+      <div id="signup-form" class="form-section">
+        <div class="input-group">
+          <label for="signupFirstName">First Name:</label>
+          <input
+            type="text"
+            id="signupFirstName"
+            placeholder="Enter first name"
+          />
+        </div>
+        <div class="input-group">
+          <label for="signupLastName">Last Name:</label>
+          <input
+            type="text"
+            id="signupLastName"
+            placeholder="Enter last name"
+          />
+        </div>
+        <div class="input-group">
+          <label for="signupUsername">Username:</label>
+          <input
+            type="text"
+            id="signupUsername"
+            placeholder="Choose a username"
+          />
+        </div>
+        <div class="input-group">
+          <label for="signupPassword">Password:</label>
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create a password"
+          />
+        </div>
+        <div class="input-group">
+          <label for="signupConfirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="signupConfirmPassword"
+            placeholder="Confirm your password"
+          />
+        </div>
+        <div id="signupError" class="error-message"></div>
+        <button class="submit-btn" onclick="handleSignup()">Sign Up</button>
+      </div>
+    </div>
+
+    <script>
+      const showLoginBtn = document.getElementById("show-login");
+      const showSignupBtn = document.getElementById("show-signup");
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+      const authTitle = document.getElementById("auth-title");
+      const authAvatar = document.getElementById("auth-avatar");
+
+      showLoginBtn.addEventListener("click", () => toggleForms(false));
+      showSignupBtn.addEventListener("click", () => toggleForms(true));
+
+      function toggleForms(isSignup) {
+        if (isSignup) {
+          showLoginBtn.classList.remove("active");
+          showSignupBtn.classList.add("active");
+          loginForm.classList.remove("active");
+          signupForm.classList.add("active");
+          authTitle.textContent = "Create Your Account";
+          authAvatar.src = "images/Signupicon.jpg";
+        } else {
+          showLoginBtn.classList.add("active");
+          showSignupBtn.classList.remove("active");
+          loginForm.classList.add("active");
+          signupForm.classList.remove("active");
+          authTitle.textContent = "Welcome Back!";
+          authAvatar.src = "images/loginicon.jpg";
+        }
+        // Clear error messages when toggling forms
+        document.getElementById("loginError").style.display = "none";
+        document.getElementById("signupError").style.display = "none";
+      }
+
+      function handleSignup() {
+        const firstName = document
+          .getElementById("signupFirstName")
+          .value.trim();
+        const lastName = document
+          .getElementById("signupLastName")
+          .value.trim();
+        const username = document
+          .getElementById("signupUsername")
+          .value.trim();
+        const password = document
+          .getElementById("signupPassword")
+          .value.trim();
+        const confirmPassword = document
+          .getElementById("signupConfirmPassword")
+          .value.trim();
+        const errorDiv = document.getElementById("signupError");
+
+        if (
+          !firstName ||
+          !lastName ||
+          !username ||
+          !password ||
+          !confirmPassword
+        ) {
+          errorDiv.textContent = "Please fill in all fields.";
+          errorDiv.style.display = "block";
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          errorDiv.textContent = "Passwords do not match.";
+          errorDiv.style.display = "block";
+          return;
+        }
+
+        let users = JSON.parse(localStorage.getItem("mealsapp_users")) || [];
+        if (users.some((u) => u.username === username)) {
+          errorDiv.textContent = "Username already taken.";
+          errorDiv.style.display = "block";
+          return;
+        }
+
+        const newUser = { username, password, firstName, lastName };
+        users.push(newUser);
+        localStorage.setItem("mealsapp_users", JSON.stringify(users));
+        alert("Signup successful! Please login.");
+        toggleForms(false);
+      }
+
+      function handleLogin() {
+        const username = document.getElementById("loginUsername").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const errorDiv = document.getElementById("loginError");
+
+        if (!username || !password) {
+          errorDiv.textContent = "Please enter both username and password.";
+          errorDiv.style.display = "block";
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem("mealsapp_users")) || [];
+        const matchedUser = users.find(
+          (u) => u.username === username && u.password === password
+        );
+
+        if (matchedUser) {
+          localStorage.setItem("mealsapp_loggedIn", "true");
+          localStorage.setItem(
+            "mealsapp_loggedInUser",
+            JSON.stringify(matchedUser)
+          );
+          window.location.href = "home.html"; // Redirect
+        } else {
+          errorDiv.textContent = "Invalid username or password.";
+          errorDiv.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>
