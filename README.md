@@ -1,24 +1,39 @@
-# Meals App
+# 🍽️ Kitchenette
 
-This is a web application built with HTML, CSS, and JavaScript that allows users to search for food items and view related recipes. 
+**Kitchenette** is a modern and responsive recipe search app where users can browse meals by category, search recipes, view detailed instructions, and save their favorite meals — all powered by [TheMealDB API](https://www.themealdb.com/).
 
-**Features:**
+## ✨ Features
 
-* **Search Functionality:** 
-    * Users can enter a food item (e.g., "egg") into a search bar.
-    * The app will display a list of related food items (e.g., "scrambled eggs," "egg salad," "omelette").
-* **Recipe Display:** 
-    * Clicking on a related food item will display a list of recipes for that item. 
-* **Liking/Disliking Functionality:** 
-    * Users can "like" or "dislike" recipes.
-* **Cypress Testing:** 
-    * The app has been thoroughly tested with Cypress, ensuring 100% test coverage and reliable functionality.
+- 🔍 **Search Meals** by name with real-time suggestions.
+- 🎲 **Random Meal Generator** for quick ideas.
+- 📂 **Browse by Category** like Breakfast, Vegan, Gluten-Free, etc.
+- ❤️ **Favorites** functionality stored locally.
+- 📱 **Mobile-First Responsive Design** with smooth animations.
+- 💡 **Swipe Support** for meal cards on mobile.
+- 🔐 **Signup/Login** with local storage (no backend required).
 
-**Technologies Used:**
+---
 
-* **Frontend:** HTML, CSS, JavaScript
-* **Testing:** Cypress
+## 🛠️ Tech Stack
 
-**Getting Started:**
+- **Frontend**: HTML, CSS, Tailwind CSS, JavaScript
+- **Animations**: GSAP, Anime.js
+- **Icons**: Font Awesome
+- **API**: [TheMealDB](https://themealdb.com/api.php)
 
-Live server link of meals app https://nithishchandraanasuri.github.io/MealsApp/
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- A modern browser
+- A local web server (recommended: Live Server or VSCode Extension)
+
+### Installation
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/yourusername/kitchenette.git
+cd kitchenette
